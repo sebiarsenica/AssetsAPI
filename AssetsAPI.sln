@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsAPI", "AssetsAPI\AssetsAPI.csproj", "{B249448E-B819-4B69-9E36-730153D63D16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B249448E-B819-4B69-9E36-730153D63D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B249448E-B819-4B69-9E36-730153D63D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B249448E-B819-4B69-9E36-730153D63D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B249448E-B819-4B69-9E36-730153D63D16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D301D2D-5E93-4C66-892C-52934E6D346E}
+	EndGlobalSection
+EndGlobal
