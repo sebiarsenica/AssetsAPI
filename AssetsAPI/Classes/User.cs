@@ -15,5 +15,18 @@
         public byte[] passwordSalt { get; set; } 
 
         public DateTime createDate { get; set; }
+
+        public UserReturn ConvertUserToUserReturn()
+        {
+            var userReturn = new UserReturn();
+
+            userReturn.id = id;
+            userReturn.username = username;
+            userReturn.fullName = fullName;
+            userReturn.email = email;
+            userReturn.createDate = createDate;
+
+            return userReturn;
+        }
     }
 }

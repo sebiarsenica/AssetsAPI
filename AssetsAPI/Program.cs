@@ -30,7 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AssetsApi");
+app.UseCors("AssetsAPI");
 
 app.UseHttpsRedirection();
 
