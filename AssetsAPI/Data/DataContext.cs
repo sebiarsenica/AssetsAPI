@@ -13,6 +13,6 @@ namespace AssetsAPI.Data
 
         public DbSet<AssignedRoles> AssignedRoles => Set<AssignedRoles>();
 
-
+        public DbSet<Asset> Assets => Set<Asset>();
     }
 }
