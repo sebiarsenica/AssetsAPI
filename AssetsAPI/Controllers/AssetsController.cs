@@ -40,6 +40,8 @@ namespace AssetsAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> addAsset(AssetDTO assetDTO)
         {
+            
+            
             var asset = new Asset();
             asset.name = assetDTO.name;
 
@@ -56,15 +58,27 @@ namespace AssetsAPI.Controllers
             return Ok("done");
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<string>> deleteAsset(int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<List<Asset>>> deleteAsset(int id)
         {
             var assetFound = _context.Assets.FirstOrDefault(a => a.id == id);
             if (assetFound == null) return BadRequest("Asset not found!");
 
             _context.Assets.Remove(assetFound);
             await _context.SaveChangesAsync();
-            return Ok("Deleted!");
+
+            var allAssets = await _context.Assets.Select(a => new Asset
+            {
+                id = a.id,
+                name = a.name,
+                sku = a.sku,
+                category = a.category,
+                quantity = a.quantity,
+                addedBy = a.addedBy,
+                image = a.image
+            }).ToListAsync();
+
+            return Ok(allAssets);
         }
 
         [HttpPut]
