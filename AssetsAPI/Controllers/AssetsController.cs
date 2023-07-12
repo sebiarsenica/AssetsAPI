@@ -4,6 +4,7 @@ using AssetsAPI.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace AssetsAPI.Controllers
 {
@@ -38,9 +39,28 @@ namespace AssetsAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> addAsset(AssetDTO assetDTO)
+        public async Task<IActionResult> addAsset(AssetDTO assetDTO)
         {
-            
+            Image image; 
+            using(MemoryStream ms = new MemoryStream(assetDTO.image))
+            {
+                image = Image.FromStream(ms);
+            }
+
+            int newWidth = 40;
+            int newHeight = 40;
+            Bitmap resizedImage = new Bitmap(newWidth, newHeight);
+            using(Graphics graphics = Graphics.FromImage(resizedImage))
+            {
+               graphics.DrawImage(image, 0, 0 , newWidth,newHeight);
+            }
+
+            byte[] resizedImageBytes; 
+            using(MemoryStream ms = new MemoryStream())
+            {
+                resizedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                resizedImageBytes = ms.ToArray();   
+            }
             
             var asset = new Asset();
             asset.name = assetDTO.name;
@@ -51,11 +71,11 @@ namespace AssetsAPI.Controllers
             asset.category = assetDTO.category;
             asset.quantity = assetDTO.quantity;
             asset.addedBy= assetDTO.addedBy;
-            asset.image = assetDTO.image;
+            asset.image = resizedImageBytes;
             
             _context.Assets.Add(asset);
             await _context.SaveChangesAsync();
-            return Ok("done");
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -93,6 +113,19 @@ namespace AssetsAPI.Controllers
 
             await _context.SaveChangesAsync();
             return Ok("Updated!");
+        }
+
+        [HttpPut("quantity/{id}")]
+        public async Task<ActionResult> editQuantity(int id)
+        {
+            var assetFound = _context.Assets.FirstOrDefault(a => a.id == id);
+            if (assetFound == null) return BadRequest("Asset not found!");
+            if (assetFound.quantity == 0) return BadRequest("Quantity is 0");
+
+            assetFound.quantity -= 1; 
+
+            await _context.SaveChangesAsync();
+            return Ok();
         }
     }
 }

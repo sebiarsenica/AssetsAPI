@@ -14,5 +14,7 @@ namespace AssetsAPI.Data
         public DbSet<AssignedRoles> AssignedRoles => Set<AssignedRoles>();
 
         public DbSet<Asset> Assets => Set<Asset>();
+
+        public DbSet<AssignedAsset> AssignedAssets => Set<AssignedAsset>();
     }
 }

@@ -83,7 +83,7 @@ namespace AssetsAPI.Controllers
             user.passwordHash = passwordHash;
             user.passwordSalt = passwordSalt;
             string dateString = DateTime.Now.ToString("dd-MM-yyyy");
-            user.createDate = DateTime.ParseExact(dateString, "dd-MM-yyyy", CultureInfo.CurrentUICulture); //To fix in front end
+            user.createDate = DateTime.ParseExact(dateString, "dd-MM-yyyy", CultureInfo.CurrentUICulture); 
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
